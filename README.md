@@ -1,4 +1,4 @@
-# DPhil Human fMRI Preprocessing Pipeline
+# Preprocessing Pipeline
 
 A pipeline for preprocessing human fMRI data with FSL.
 
