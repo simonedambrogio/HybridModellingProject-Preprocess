@@ -22,7 +22,7 @@ python prepare.py --subject 1 --session 1
 # Run for a specific subject, all sessions
 python prepare.py --subject 1
 
-# Submit to cluster (SLURM by default)
+# Submit to cluster
 python prepare.py --subject 1 --submit_to slurm
 
 # Submit to SGE cluster
@@ -33,7 +33,7 @@ python prepare.py --subject 1 --submit_to sge
 
 - `--subject`: Subject ID (required)
 - `--session`: Session number (optional, runs all sessions if not specified)
-- `--submit_to`: Cluster type to submit to (choices: "slurm", "sge", default: "slurm"). Specifying this option automatically enables job submission.
+- `--submit_to`: Cluster type to submit to (choices: "slurm", "sge"). Specifying this option automatically enables job submission.
 
 ## Prepare Steps in Detail
 

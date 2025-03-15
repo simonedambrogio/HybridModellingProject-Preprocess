@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--subject", type=int, required=True)
     parser.add_argument("--session", type=int, required=False)
-    parser.add_argument("--submit_to", type=str, required=False, default="slurm", choices=["slurm", "sge"])
+    parser.add_argument("--submit_to", type=str, required=False)
     args = parser.parse_args()
     
     submit = True if args.submit_to is not None else False
