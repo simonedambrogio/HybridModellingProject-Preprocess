@@ -1,0 +1,29 @@
+paths:
+  preprocess: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess"
+  prepare: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/prepare"
+  brain:  "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-BrainModelling"
+  info-sampling-task-data: "/home/fs0/jdf650/scratch/InfoSamplingTask/data"
+  data: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Data"
+  FSLDIR: "/home/fs0/jdf650/scratch/FSL"
+  config_dir: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/config"
+
+raw2prepared:
+  bold4d: "func.nii.gz"
+  boldwb: "expanded_func.nii.gz"
+  fmapmg: "fmap_mag.nii.gz"
+  fmapph: "fmap_phase.nii.gz"
+  mprage: "struct.nii.gz"
+
+prepare:
+  files2keep: ["func_biascorr.nii.gz", "fmap_rads.nii.gz", "fmap_mag_brain.nii.gz", "expanded_func_brain.nii.gz", "synthstrip_biascorr_brain.nii.gz", "funcmask.nii.gz", "logs"]
+  paths:
+    input: "/home/fs0/jdf650/scratch/InfoSamplingTask/data/"
+    output: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/prepare/output"
+    
+preprocess:
+  inputs: ["func_biascorr.nii.gz", "fmap_rads.nii.gz", "fmap_mag_brain.nii.gz", "expanded_func_brain.nii.gz", "synthstrip_biascorr_brain.nii.gz", "funcmask.nii.gz"]
+  paths:
+    output: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/preprocess/output"
+    template: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/preprocess/script/template-fsf"
+    standard: "/home/fs0/jdf650/scratch/FSL/data/standard/MNI152_T1_1mm_brain"
+  
