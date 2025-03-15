@@ -22,16 +22,18 @@ python prepare.py --subject 1 --session 1
 # Run for a specific subject, all sessions
 python prepare.py --subject 1
 
-# Submit to cluster
-python prepare.py --subject 1 --submit True --submit_to slurm
+# Submit to cluster (SLURM by default)
+python prepare.py --subject 1 --submit_to slurm
+
+# Submit to SGE cluster
+python prepare.py --subject 1 --submit_to sge
 ```
 
 ### Command Line Arguments
 
 - `--subject`: Subject ID (required)
 - `--session`: Session number (optional, runs all sessions if not specified)
-- `--submit`: Whether to submit jobs to a cluster (default: False)
-- `--submit_to`: Cluster type to submit to (choices: "slurm", "sge", default: "slurm")
+- `--submit_to`: Cluster type to submit to (choices: "slurm", "sge", default: "slurm"). Specifying this option automatically enables job submission.
 
 ## Prepare Steps in Detail
 
@@ -163,7 +165,7 @@ The prepare module supports submitting jobs to computing clusters:
 - **SLURM**: For SLURM-based clusters
 - **SGE**: For Sun Grid Engine-based clusters
 
-When the `--submit` flag is set to True, the module will create and submit appropriate job scripts to the specified cluster system.
+When the `--submit_to` parameter is specified, the module will automatically create and submit appropriate job scripts to the specified cluster system.
 
 ## Session-Specific Processing
 

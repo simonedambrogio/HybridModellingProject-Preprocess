@@ -18,10 +18,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--subject", type=int, required=True)
     parser.add_argument("--session", type=int, required=False)
-    parser.add_argument("--submit", type=bool, required=False, default=False)
     parser.add_argument("--submit_to", type=str, required=False, default="slurm", choices=["slurm", "sge"])
     args = parser.parse_args()
     
+    submit = True if args.submit_to is not None else False
+    
     sessions = range(1, 5) if args.session is None else [args.session]
     for session in sessions:
-        main(config, args.subject, session, args.submit, args.submit_to)
+        main(config, args.subject, session, submit, args.submit_to)
