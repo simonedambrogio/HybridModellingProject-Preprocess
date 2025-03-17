@@ -2,9 +2,20 @@ import os
 from fsl.wrappers import fslmaths, bet, fsl_prepare_fieldmap
 from preprocessing.utils import get_dir_name
 from preprocessing.prepare.dontsb.reorient2standard import _reorient2standard
+from preprocessing.utils import _sbjname, _sesname
 
 def prepare_fmap(config, subject: int, session: int, input_dir: str, output_dir: str):
     
+    # Check if the input file exists ----------------------------------------------
+    sbjname = _sbjname(subject)
+    sesname = _sesname(session)
+    if input_dir is None:
+        input_dir = os.path.join(config['prepare']['paths']['input'], sbjname, sesname, "raw")
+    input_file = os.path.join(input_dir, "fmapph.nii")
+    if not os.path.exists(input_file):
+        raise FileNotFoundError(f"fmapph.nii not found in {input_dir}")
+
+    # Reorient the files to standard space ----------------------------------------
     print("Reorienting fmapph to standard...")
     out_fmapph = _reorient2standard(config, subject, session, "fmapph", input_dir=input_dir, output_dir=output_dir)
     print("Reorienting fmapmg to standard...")

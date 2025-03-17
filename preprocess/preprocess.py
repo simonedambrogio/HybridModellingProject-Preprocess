@@ -13,17 +13,33 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser()
         parser.add_argument("--subject", type=int, required=True)
         parser.add_argument("--session", type=int, required=False, default=None)
-        parser.add_argument("--submit_to", type=str, required=False, default="slurm", choices=["slurm", "sge"])
-        parser.add_argument("--type", type=str, required=False, default="sge", choices=["sge", "fsl_sub"])
         parser.add_argument("--fsf_name", type=str, required=False, default="design.fsf")
         parser.add_argument("--feat_name", type=str, required=False, default="out")
         parser.add_argument("--input_dir", type=str, required=False, default=None)
         parser.add_argument("--output_dir", type=str, required=False, default=None)
         parser.add_argument("--useSpecificMask", type=bool, required=False, default=True)
+        parser.add_argument("--make_design_only", action="store_true", help="If True, only the design will be made, but the feat will not be run")
+        parser.add_argument("--submit", action="store_true", help="If True, the feat will be submitted to the cluster")
         args = parser.parse_args()
         
         sessions = [1,2,3,4] if args.session is None else [args.session]
-        submit = False if args.submit_to == None else True
+        
+        if args.make_design_only:
+            if args.submit:
+                print("Cannot submit to cluster when making design only")
+                exit()
+            args.submit = False
 
         for session in sessions:
-            preprocess(config, args.subject, session, args.fsf_name, args.feat_name, args.useSpecificMask, args.input_dir, args.output_dir, submit, args.submit_to, args.type)
+            preprocess(
+                config=config, 
+                subject=args.subject, 
+                session=session, 
+                fsf_name=args.fsf_name, 
+                feat_name=args.feat_name, 
+                useSpecificMask=args.useSpecificMask, 
+                input_dir=args.input_dir,
+                output_dir=args.output_dir, 
+                submit=args.submit, 
+                make_design_only=args.make_design_only, 
+                **config["preprocess"]["design"])

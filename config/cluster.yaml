@@ -26,4 +26,9 @@ preprocess:
     output: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/preprocess/output"
     template: "/home/fs0/jdf650/scratch/DPhil-Human-fMRI/DPhil-Human-fMRI-Preprocess/preprocess/script/template-fsf"
     standard: "/home/fs0/jdf650/scratch/FSL/data/standard/MNI152_T1_1mm_brain"
-  
+  design:
+    smooth: 2 # spatial smoothing FWHM in mm
+    te: 27 # echo time in ms
+    reginitial_highres_dof: 6 # Degrees of Freedom for registration to initial highres
+    regstandard_dof: 12 # Degrees of Freedom for registration to standard space 
+ 
