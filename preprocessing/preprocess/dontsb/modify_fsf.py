@@ -52,6 +52,7 @@ def modify_fsf(
         'prepared_func': func_dir,
         'fmap_rads': fmap_rads_dir,
         'fmap_mag': fmap_mag_dir,
+        'unwarping': 1,
         'whole_func': whole_func_dir,
         'structural': struct_brain_dir,
         'alternative_mask': alternative_mask_dir if useSpecificMask else "",

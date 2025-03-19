@@ -8,11 +8,11 @@ def _sesname(ses: int):
 
 def get_fsf_dir(subject: int, session: int, template_dir: str):
 
-    if (subject==14) and (session in [3,4]):
-        fsfName = 'preprocess_S14_R34.fsf'
-    else:
-        fsfName = 'preprocess.fsf'
-
+    # if (subject==14) and (session in [3,4]):
+    #     fsfName = 'preprocess_S14_R34.fsf'
+    # else:
+    #     fsfName = 'preprocess.fsf'
+    fsfName = 'preprocess.fsf'
     return os.path.join(template_dir, fsfName), fsfName
 
 def get_dir_name(file_path: str):

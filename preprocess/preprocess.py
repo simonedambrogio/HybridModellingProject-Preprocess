@@ -31,6 +31,10 @@ if __name__ == "__main__":
             args.submit = False
 
         for session in sessions:
+            # Don't unwarp for sessions 3 and 4 of subject 14
+            unwarping = 0 if session in [3,4] and args.subject == 14 else 1
+            
+            # Preprocess the data
             preprocess(
                 config=config, 
                 subject=args.subject, 
@@ -42,4 +46,5 @@ if __name__ == "__main__":
                 output_dir=args.output_dir, 
                 submit=args.submit, 
                 make_design_only=args.make_design_only, 
+                unwarping=unwarping,
                 **config["preprocess"]["design"])

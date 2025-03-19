@@ -52,8 +52,10 @@ def _cleanup(config, subject: int, session: int, feat_name: str, print_only: boo
             removes_files.append(file)
             if not print_only:
                 os.remove(os.path.join(config["prepare"]["paths"]["output"], sbjname, sesname, file))
-    
-    print(f"\t\033[92m✅ {"Removing" if not print_only else "You need to remove"} {len(removes_files)} file{'s' if len(removes_files) != 1 else ''} from the prepare folder\033[0m. {"\033[93mset --action to remove them.\033[0m" if print_only and len(removes_files) > 0 else ""}\033[0m")
+                print(f"\t\033[94m✅ Removed {file} from the prepare folder.\033[0m")
+            else:
+                print(f"\t\033[92mYou need to remove {len(removes_files)} file{'s' if len(removes_files) != 1 else ''} from the prepare folder\033[0m. \033[93mset --action to remove them.\033[0m")
+
     if len(removes_files) > 0:
         for (i, file) in enumerate(removes_files):
             print(f"\t\t\033[91m{i+1}. {file}\033[0m")
@@ -63,7 +65,9 @@ def _cleanup(config, subject: int, session: int, feat_name: str, print_only: boo
     if filtered_func_exists(config, subject, session, feat_name) and os.path.exists(bias_corr_file):
         if not print_only:
             os.remove(bias_corr_file)
-        print(f"\t\033[92m✅ {"Removing" if not print_only else "You can remove"} func_biascorr.nii.gz from the prepare folder to save space.\033[0m {"\033[93mset --action to remove it.\033[0m" if print_only else ""}\033[0m")
+            print(f"\t\t\033[94m👷 Removed func_biascorr.nii.gz from the prepare folder.\033[0m")
+        else:
+            print(f"\t\t\033[93m🔊 You can remove func_biascorr.nii.gz from the prepare folder to save space.\n\t\t   set --action to remove it.\033[0m")
     
 def get_fileout(config: dict, input: str, subject: int, session: int):
     """
@@ -149,7 +153,7 @@ def check_status(config: dict, subject: int, session: int, feat_name: str, actio
                     file_exists_in_sessionm1 = os.path.exists(fileout_sm1)
                     if action and file_exists_in_sessionm1:
                         os.symlink(fileout_sm1, fileout)
-                        print(f"\t\033[92m✅ Symbolic link created for {filename}.\033[0m")
+                        print(f"\t\033[94m👷 Symbolic link created for {filename}.\033[0m")
                     else:
                         print(f"\t\033[91m❌ File {filename} does not exist.\033[0m{f"\033[93m Use --action to fix it.\033[0m" if file_exists_in_sessionm1 else f"\033[93m Create it for session {session-1} first."}\033[0m")
                 else:
